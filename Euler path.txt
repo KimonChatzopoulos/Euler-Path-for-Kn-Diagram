@@ -1,0 +1,68 @@
+#include <iostream>
+#include <array>
+#include <math.h> 
+#include <algorithm>  
+using namespace std;
+int main()
+{
+int kom;
+int x;
+x=-1;
+cout << "Give the number of vertices: ";
+cin >> kom;
+int sum;  
+sum = 0;
+for (int i=1;i<= floor (kom/2);i++)
+    {  
+        if (__gcd(kom,i) != 1)
+        {
+            sum = sum + kom/__gcd(kom,i);
+        }
+        else
+        {
+            sum = sum + kom;
+        }
+        
+    }
+
+int akmes[((kom*(kom-1))-1)][2];
+if  (kom % 2 == 0)
+    {
+        cout << " it's not a Euler circuit";
+    }
+else
+{
+for (int i=0;i<=floor (kom/2);i++) 
+{
+
+    for (int j=0;j<=kom-1;j++)
+    {
+        x=x+1;
+        if ((j==0) & (i==0))
+         {
+            akmes[0][1]=0;
+            akmes[0][2]=1;
+         }
+         else
+         {
+            akmes[x][1]=akmes[x-1][2];  
+            akmes[x][2]=((akmes[x][1]+i+1) % kom);
+         
+            if ((akmes[x][2] % kom)==0)
+            {
+                break;
+            }
+         }
+         
+    }
+}
+for (int i=0;i<=sum-1;i++)
+    {
+        cout << akmes[i][1] << "," << akmes[i][2] << " ";
+         
+    }
+}
+
+     
+    system("pause");
+}
